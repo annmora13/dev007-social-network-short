@@ -1,11 +1,10 @@
-import { Home } from './components/Home.js';
 import { Login } from './components/Login.js';
+import { Muro } from './components/Muro.js';
 
 const rootDiv = document.getElementById('root');
-
 const routes = {
-  '/': Home,
-  '/login': Login,
+  '/': Login,
+  '/Muro': Muro,
 };
 
 export const onNavigate = (pathname) => {

@@ -1,13 +1,38 @@
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+
+
 export const Login = (onNavigate) => {
   const HomeDiv = document.createElement('div');
-  HomeDiv.textContent = 'Bienvenida al Login';
-  const buttonHome = document.createElement('button');
 
-  buttonHome.textContent = 'Regresar al Home';
+  HomeDiv.innerHTML += '<h1>Inicia Sesión</h1> <div id="buttonLogin"><img src="../img/image3.png" alt="Google"</div>';
 
-  buttonHome.addEventListener('click', () => onNavigate('/'));
+  // const buttonLogin = document.getElementById('buttonlogin');
+  // buttonLogin.addEventListener('click', () => onNavigate('/Muro'));
+  // buttonLogin.addEventListener('click', (e) => {
+  //   e.preventDefault();
+  //   onNavigate('/Muro');
+  // });
 
-  HomeDiv.appendChild(buttonHome);
+  const auth = getAuth();
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      // The signed-in user info.
+      const user = result.user;
+      // IdP data available using getAdditionalUserInfo(result)
+      // ...
+    }).catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      // ...
+    });
 
   return HomeDiv;
 };

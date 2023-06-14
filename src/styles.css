@@ -1,0 +1,42 @@
+body {
+    background-image: url('./img/pared-ladrillo-luz-neon.jpg');
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+
+*{
+    font-family:"Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+#root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#buttonLogin{
+    margin: auto;
+}
+
+#buttonLogin img{
+    display: flex;
+    margin: auto;
+}
+
+h1{
+    font-family:"Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+    font-size: 50px;
+    font-weight: normal;
+    color: #ffffff;
+    margin: 70px;
+    padding: 0;
+}
+

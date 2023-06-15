@@ -6,8 +6,8 @@ body {
     background-repeat: no-repeat;
 }
 
-*{
-    font-family:"Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+* {
+    font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
     font-size: 16px;
     font-weight: normal;
     color: #333;
@@ -22,21 +22,32 @@ body {
     height: 100%;
 }
 
-#buttonLogin{
+.buttonLogin {
     margin: auto;
 }
 
-#buttonLogin img{
+.buttonLogin img {
     display: flex;
     margin: auto;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
 }
 
-h1{
-    font-family:"Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+.buttonLogin:hover::after {
+    content: "";
+    position: absolute;
+}
+
+.buttonLogin:hover img {
+    opacity: 3;
+}
+
+
+h1 {
+    font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
     font-size: 50px;
     font-weight: normal;
     color: #ffffff;
     margin: 70px;
     padding: 0;
 }
-

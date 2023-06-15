@@ -20,24 +20,8 @@ const firebaseConfig = {
 // import=recibir
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
 
 export const db = getFirestore(app);
-
-// Flujo de acceso con SDK
-
-export const provider = new GoogleAuthProvider(app);
-
-// Redirección
-
-export const redirect = signInWithRedirect (auth, provider);
-
-// export function registerUser(email, password) {
-//   return createUserWithEmailAndPassword(auth, email, password);
-// }
-
-// export function loginUser(email, password) {
-//   return signInWithEmailAndPassword(auth, email, password);
-// }

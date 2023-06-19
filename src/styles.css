@@ -6,6 +6,11 @@ body {
     background-repeat: no-repeat;
 }
 
+.container1{
+    display: grid;
+    justify-content: center;
+}
+
 * {
     font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
     font-size: 16px;
@@ -50,4 +55,45 @@ h1 {
     color: #ffffff;
     margin: 70px;
     padding: 0;
+}
+
+.neonText {
+animation: flicker 5s infinite alternate;
+color: #ffffff;
+}
+
+h1 {
+font-size: 30px;  
+}
+
+/* Flickering animation */
+@keyframes flicker {
+
+0%, 18%, 22%, 25%, 53%, 57%, 100% {
+
+  text-shadow:
+  0 0 7px #fff,
+  0 0 10px #fff,
+  0 0 21px #fff,
+  0 0 42px #f09,
+  0 0 82px #f09,
+  0 0 92px #f09,
+  0 0 102px #f09,
+  0 0 151px #f09;
+}
+
+20%, 24%, 55% {        
+  text-shadow: none;
+}    
+}
+
+.new-post__container__textarea {
+    width: 100%;
+    height: 200px;
+}
+
+.new-post__container__button {
+    display: flex;
+    margin-top: 10px;
+    justify-content: center;
 }

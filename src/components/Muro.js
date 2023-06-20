@@ -1,3 +1,5 @@
+import { createPost } from '../lib';
+
 export const Muro = (onNavigate) => {
   const HomeDiv = document.createElement('div');
   const buttonHome = document.createElement('button');
@@ -28,7 +30,7 @@ export const Muro = (onNavigate) => {
         '.new-post__container__textarea',
       );
       createPost(textAreaContent.value)
-        .then(() => {
+        .then((posts) => {
         });
     },
   );

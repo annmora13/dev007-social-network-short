@@ -9,9 +9,8 @@ export const iniciarSesionConGoogle = () => {
   return signInWithPopup(auth, provider);
 };
 
-export const createPost = (contenido) => {
-  const 
-  return addDoc(collection(db, 'posts'), {
-    contenido: contenido,
-  });
-};
+export const createPost = (contenido) => (
+  addDoc(collection(db, 'posts'), {
+    contenido,
+  })
+);

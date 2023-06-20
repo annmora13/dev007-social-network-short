@@ -3,7 +3,7 @@ body {
     background-size: cover;
     height: 100%;
     width: 100%;
-    background-repeat: no-repeat;
+    background-repeat:repeat-y;
 }
 
 .container1 {
@@ -166,7 +166,6 @@ font-size: 30px;
     color: var(--black);
     text-shadow: none;
     animation: none;
-
 }
 
 .new-post__container__button:hover .neon-text2{

@@ -13,12 +13,25 @@ export const Muro = (onNavigate) => {
   </div>
     <div class="new-post__container">
       <textarea class="new-post__container__textarea"></textarea>
-      <button class="new-post__container__button">Publicar</button>
+      <span class= "neon-text2">
+      <button class="new-post__container__button" >Publicar</button></span>
     </div>
     <section class="posts">
       <div class="posts__post">
         <h1 class="neonText">Comenta tu duda o sugerencia</h1>
       </div></section>`;
+
+  HomeDiv.querySelector('.new-post__container__button').addEventListener(
+    'click',
+    () => {
+      const textAreaContent = HomeDiv.querySelector(
+        '.new-post__container__textarea',
+      );
+      createPost(textAreaContent.value)
+        .then(() => {
+        });
+    },
+  );
 
   HomeDiv.appendChild(buttonHome);
 

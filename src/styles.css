@@ -6,9 +6,11 @@ body {
     background-repeat: no-repeat;
 }
 
-.container1{
-    display: grid;
+.container1 {
+    display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 * {
@@ -25,6 +27,9 @@ body {
     justify-content: center;
     align-items: center;
     height: 100%;
+    --glow-color: #f09;
+    --black: #1a1e23;
+    --shadow: #fff;
 }
 
 .buttonLogin {
@@ -88,12 +93,90 @@ font-size: 30px;
 }
 
 .new-post__container__textarea {
-    width: 100%;
+    width: 400px;
     height: 200px;
+}
+
+.new-post__container__textarea{
+    border-radius: 10px;
+}
+.new-post__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .new-post__container__button {
     display: flex;
     margin-top: 10px;
+    font-weight: bold;
     justify-content: center;
+    position: relative;
+    color: var(--shadow);
+    cursor: pointer;
+    padding: 0.35em 1.2em;
+    border: 0.15em solid var(--glow-color);
+    border-radius: 0.8em;
+    background: none;
+    perspective: 2em;
+    letter-spacing: 1em;
+    box-shadow: inset   0 0 0.5em 0 var(--glow-color),
+                        0 0 0.5em 0 var(--glow-color);
+    animation: border-flicker 2s linear infinite;
+}
+
+.neon-text2{
+    font-weight: bold;
+    float: left;
+    margin-right: -0.8em;
+    text-shadow:  0 0 0.125em var(--shadow),
+                  0 0 0.45em var(--glow-color);
+    animation: text-flicker 3s linear infinite;
+}
+
+.new-post__container__button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0.7;
+    filter: blur(1em);
+    background: var(--glow-color);
+    pointer-events: none;
+}
+
+.new-post__container__button::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 1;
+    z-index: -1;
+    border-radius: 0.6em;
+    background-color: var(--glow-color);
+    box-shadow: 0 0 2em 0.2em var(--glow-color);
+    transition: opacity 100ms linear;
+}
+
+.new-post__container__button:hover {
+    color: var(--black);
+    text-shadow: none;
+    animation: none;
+
+}
+
+.new-post__container__button:hover .neon-text2{
+    animation: none;
+
+}
+.new-post__container__button:hover::before{
+    filter: blur(1.5em);
+    opacity: 1;
+}
+.new-post__container__button:hover::after{
+    opacity: 1;
 }

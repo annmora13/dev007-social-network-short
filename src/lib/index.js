@@ -1,5 +1,7 @@
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { addDoc, collection } from 'firebase/firestore';
+import {
+  addDoc, collection, doc, onSnapshot,
+} from 'firebase/firestore';
 import { app, auth, db } from '../firebase';
 
 // FLujo de acceso con DSK export const provider = new GoogleAuthProvider(app);
@@ -9,8 +11,10 @@ export const iniciarSesionConGoogle = () => {
   return signInWithPopup(auth, provider);
 };
 
-export const createPost = (contenido) => (
+export const createPost = (text) => (
   addDoc(collection(db, 'posts'), {
-    contenido,
+    contenido: text,
   })
 );
+
+export const getPosts = (callback) => onSnapshot(collection(db, 'posts'), callback);

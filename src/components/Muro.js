@@ -1,12 +1,14 @@
-import { createPost } from '../lib';
+import { collection, onSnapshot } from 'firebase/firestore';
+import { createPost, getPosts } from '../lib/index.js';
 
 export const Muro = (onNavigate) => {
   const HomeDiv = document.createElement('div');
   const buttonHome = document.createElement('button');
+  const postList = document.createElement('div');
 
   HomeDiv.setAttribute('class', 'container1');
   buttonHome.textContent = 'Regresar al Home';
-
+  buttonHome.className = 'new-post__container__button';
   buttonHome.addEventListener('click', () => onNavigate('/'));
 
   HomeDiv.innerHTML += `
@@ -31,10 +33,30 @@ export const Muro = (onNavigate) => {
       );
       createPost(textAreaContent.value)
         .then((posts) => {
+          getPosts(onSnapshot);
+          console.log(postList);
         });
+
+        postList.className = "";
+
+
+      getPosts((collection) => {
+        let html = '';
+        collection.forEach((doc) => {
+          const posts = doc.data();
+          console.log('posts');
+          html += `
+            <li class="list-group-item list-group-item-action">
+            <p>${posts.contenido}</p>
+            </li>
+          `;
+        });
+        postList.innerHTML = html;
+      });
     },
   );
 
+  HomeDiv.appendChild(postList);
   HomeDiv.appendChild(buttonHome);
 
   return HomeDiv;

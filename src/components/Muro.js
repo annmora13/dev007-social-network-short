@@ -37,24 +37,22 @@ export const Muro = (onNavigate) => {
           console.log(postList);
         });
 
-        postList.className = "";
-
-
-      getPosts((collection) => {
-        let html = '';
-        collection.forEach((doc) => {
-          const posts = doc.data();
-          console.log('posts');
-          html += `
+      postList.className = '';
+    },
+  );
+  getPosts((collection) => {
+    let html = '';
+    collection.forEach((doc) => {
+      const posts = doc.data();
+      console.log('posts');
+      html += `
             <li class="list-group-item list-group-item-action">
             <p>${posts.contenido}</p>
             </li>
           `;
-        });
-        postList.innerHTML = html;
-      });
-    },
-  );
+    });
+    postList.innerHTML = html;
+  });
 
   HomeDiv.appendChild(postList);
   HomeDiv.appendChild(buttonHome);

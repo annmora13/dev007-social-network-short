@@ -1,6 +1,6 @@
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import {
-  addDoc, collection, doc, onSnapshot,
+  addDoc, collection, deleteDoc, doc, onSnapshot,
 } from 'firebase/firestore';
 import { app, auth, db } from '../firebase';
 
@@ -18,3 +18,5 @@ export const createPost = (text) => (
 );
 
 export const getPosts = (callback) => onSnapshot(collection(db, 'posts'), callback);
+
+export const erasePosts = (id) => deleteDoc(doc(db, 'posts', id));

@@ -32,6 +32,12 @@ body {
     --shadow: #fff;
 }
 
+.posts{
+    display: flex;
+    justify-content: space-between;
+    gap: 5rem;
+}
+
 .buttonLogin {
     margin: auto;
 }
@@ -178,4 +184,20 @@ font-size: 30px;
 }
 .new-post__container__button:hover::after{
     opacity: 1;
+}
+
+p{
+    color: #000000;
+    opacity: 2;
+}
+
+.list-group-item-list-group-item-action{
+
+    display: flex;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20em;
+    opacity: 0.5;
+    margin: 20px;
+    padding:.3rem;
+
 }

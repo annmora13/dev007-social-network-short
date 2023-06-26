@@ -1,16 +1,20 @@
-import { collection, onSnapshot } from 'firebase/firestore';
-import { createPost, getPosts } from '../lib/index.js';
+import { onSnapshot } from 'firebase/firestore';
+import { createPost, erasePosts, getPosts } from '../lib/index.js';
 
+// Variables
 export const Muro = (onNavigate) => {
   const HomeDiv = document.createElement('div');
   const buttonHome = document.createElement('button');
   const postList = document.createElement('div');
 
+  // Asignación de clases
   HomeDiv.setAttribute('class', 'container1');
   buttonHome.textContent = 'Regresar al Home';
   buttonHome.className = 'new-post__container__button';
   buttonHome.addEventListener('click', () => onNavigate('/'));
+  postList.classList.add('x');
 
+  // Muro
   HomeDiv.innerHTML += `
   <div class="posts__post">
     <h1 class="neonText">¡Bienvenido, coder!</h1>
@@ -25,6 +29,7 @@ export const Muro = (onNavigate) => {
         <h1 class="neonText">Comenta tu duda o sugerencia</h1>
       </div></section>`;
 
+  // Publicar post
   HomeDiv.querySelector('.new-post__container__button').addEventListener(
     'click',
     () => {
@@ -34,26 +39,47 @@ export const Muro = (onNavigate) => {
       createPost(textAreaContent.value)
         .then((posts) => {
           getPosts(onSnapshot);
-          console.log(postList);
+          console.log(posts);
         });
 
       postList.className = '';
     },
   );
-  getPosts((collection) => {
+
+  // Mostrar post
+  getPosts((querySnapshot) => {
     let html = '';
-    collection.forEach((doc) => {
+    querySnapshot.forEach((doc) => {
       const posts = doc.data();
-      console.log('posts');
       html += `
-            <li class="list-group-item list-group-item-action">
+            <div class="list-group-item-list-group-item-action">
             <p>${posts.contenido}</p>
-            </li>
+            <button class="btn-delete"> <svg data-id="${doc.id}" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#a905b6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M4 7h16" />
+            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+            <path d="M10 12l4 4m0 -4l-4 4" />
+          </svg></button>
+          <button><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#a905b6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+          <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+          <path d="M16 5l3 3" />
+        </svg></button>
+            </div></div>
           `;
     });
     postList.innerHTML = html;
-  });
 
+    const btnsDelete = postList.querySelectorAll('.btn-delete');
+    btnsDelete.forEach((button) => button.addEventListener('click', ({ target: { dataset } }) => {
+      erasePosts(dataset.id);
+    }));
+  });
+  // e.preventDefault();
+
+  // Secciones
   HomeDiv.appendChild(postList);
   HomeDiv.appendChild(buttonHome);
 

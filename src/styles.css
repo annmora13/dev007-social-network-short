@@ -68,7 +68,7 @@ h1 {
     padding: 0;
 }
 
-.neonText {
+.neonText, h1{
 animation: flicker 5s infinite alternate;
 color: #ffffff;
 }

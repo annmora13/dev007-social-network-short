@@ -1,5 +1,5 @@
 import { onSnapshot } from 'firebase/firestore';
-import { async } from 'regenerator-runtime';
+// import { async } from 'regenerator-runtime';
 import {
   createPost, erasePosts, getPosts, getPost, editPost,
 } from '../lib/index.js';
@@ -27,7 +27,8 @@ export const Muro = (onNavigate) => {
     <div class="new-post__container">
       <textarea id="doitTask" class="new-post__container__textarea"></textarea>
       <span class= "neon-text2">
-      <button class="new-post__container__button" >Publicar</button></span>
+      <button class="new-post__container__button" >Publicar</button>
+      <button class="edit-post__container__button" >Editar</button></span>
     </div>
     <section class="posts">
       <div class="posts__post">
@@ -43,6 +44,22 @@ export const Muro = (onNavigate) => {
         '.new-post__container__textarea',
       );
       createPost(textAreaContent.value)
+        .then((posts) => {
+          getPosts(onSnapshot);
+          console.log(posts);
+        });
+
+      postList.className = '';
+    },
+  );
+  // Editar Post
+  HomeDiv.querySelector('.edit-post__container__button').addEventListener(
+    'click',
+    async (e) => {
+      const textAreaContent = HomeDiv.querySelector(
+        '.new-post__container__textarea',
+      );
+      editPost(textAreaContent.value, e.target.getAttribute('data-id'))
         .then((posts) => {
           getPosts(onSnapshot);
           console.log(posts);
@@ -75,12 +92,8 @@ export const Muro = (onNavigate) => {
         </svg></button>
             </div></div>
           `;
-
-          
     });
     postList.innerHTML = html;
-
-    console.log(postList)
 
     const btnsDelete = postList.querySelectorAll('.btn-delete');
     btnsDelete.forEach((button) => button.addEventListener('click', ({ target: { dataset } }) => {
@@ -90,14 +103,16 @@ export const Muro = (onNavigate) => {
     const btnsEdit = postList.querySelectorAll('.btn-edit');
     btnsEdit.forEach((button) => {
       button.addEventListener('click', async (e) => {
-        console.log(e.target.getAttribute('data-id'))
+        console.log(e.target.getAttribute('data-id'));
         const doc = await getPost(e.target.getAttribute('data-id'));
-        //const task = doc.data;
-        //const updatePost = button.getAttribute('id');
         console.log(doc.data());
-        document.getElementById('doitTask').value = doc.data(
-          +
-        ).contenido;
+        document.getElementById('doitTask').value = doc.data().contenido;
+        const button5 = document.querySelector('.edit-post__container__button');
+        if (button5) {
+          button5.setAttribute('data-it', e.target.getAttribute('data-id'));
+          console.log(button5);
+        }
+        // editPost(e.target.getAttribute('data-id'));
       });
     });
   });

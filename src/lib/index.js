@@ -23,4 +23,6 @@ export const erasePosts = (id) => deleteDoc(doc(db, 'posts', id));
 
 export const getPost = (id) => getDoc(doc(db, 'posts', id));
 
-export const editPost = (id) => updateDoc(db, 'posts', id);
+export const editPost = (id, newFields) => {
+  updateDoc(doc(db, 'posts', id), newFields);
+};

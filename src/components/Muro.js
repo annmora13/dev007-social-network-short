@@ -1,4 +1,4 @@
-import { onSnapshot } from 'firebase/firestore';
+import { onSnapshot, updateDoc } from 'firebase/firestore';
 // import { async } from 'regenerator-runtime';
 import {
   createPost, erasePosts, getPosts, getPost, editPost,
@@ -10,6 +10,8 @@ export const Muro = (onNavigate) => {
   const principal = document.createElement('div');
   const buttonHome = document.createElement('button');
   const postList = document.createElement('div');
+  let editStatus = false;
+  let id = "";
 
   // Asignación de clases
   HomeDiv.setAttribute('class', 'container1');
@@ -105,15 +107,23 @@ export const Muro = (onNavigate) => {
       button.addEventListener('click', async (e) => {
         console.log(e.target.getAttribute('data-id'));
         const doc = await getPost(e.target.getAttribute('data-id'));
+        editStatus = true;
+        id = e.target.getAttribute('data-id');
         console.log(doc.data());
         document.getElementById('doitTask').value = doc.data().contenido;
         const button5 = document.querySelector('.edit-post__container__button');
-        if (button5) {
-          button5.setAttribute('data-it', e.target.getAttribute('data-id'));
-          console.log(button5);
+        if (!editStatus) {
+          saveTask(e.target.getAttribute('data-id'));
+          // button5.setAttribute('data-it', e.target.getAttribute('data-id'));
+        } else {
+          updateDoc(id, {
+            e.target.getAttribute('data-id'),
+          })
+          editStatus = false;
         }
         // editPost(e.target.getAttribute('data-id'));
       });
+      postList.reset();
     });
   });
 

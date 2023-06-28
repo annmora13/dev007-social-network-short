@@ -242,12 +242,35 @@ p{
 }
 
 .list-group-item-list-group-item-action{
-
     display: flex;
     background-color: rgb(255, 255, 255);
-    border-radius: 20em;
+    border-radius: 05px;
     opacity: 0.5;
     margin: 20px;
     padding:.3rem;
-
 }
+
+.btn-delete, .btn-edit{
+    position: relative;
+    bottom: 0px;
+    right: -110px;
+}
+.like-button {
+    position: relative;
+    bottom: -20px;
+    right: 0px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    outline: none;
+}
+
+.like-button i {
+    margin-right: 5px;
+    color: rgb(46, 45, 45);
+}
+
+.like-button i.active {
+    color: red;
+}
+

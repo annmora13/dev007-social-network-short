@@ -73,9 +73,9 @@ animation: flicker 5s infinite alternate;
 color: #ffffff;
 }
 
-h1 {
+/* h1 {
 font-size: 30px;  
-}
+} */
 
 /* Flickering animation */
 @keyframes flicker {
@@ -101,11 +101,12 @@ font-size: 30px;
 .new-post__container__textarea {
     width: 400px;
     height: 200px;
-}
-
-.new-post__container__textarea{
     border-radius: 10px;
 }
+
+/* .new-post__container__textarea{
+    
+} */
 .new-post__container {
     display: flex;
     flex-direction: column;

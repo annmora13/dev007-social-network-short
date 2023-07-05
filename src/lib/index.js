@@ -1,6 +1,6 @@
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import {
-  addDoc, collection, deleteDoc, getDoc, doc, onSnapshot,
+  addDoc, collection, deleteDoc, getDoc, doc, onSnapshot, updateDoc,
 } from 'firebase/firestore';
 import { app, auth, db } from '../firebase';
 
@@ -23,6 +23,10 @@ export const erasePosts = (id) => deleteDoc(doc(db, 'posts', id));
 
 export const getPost = (id) => getDoc(doc(db, 'posts', id));
 
-// export const editPost = (id, newFields) => {
-//   updateDoc(doc(db, 'posts', id), newFields);
-// };
+export const editPost = (id, newFields) => {
+  const washingtonRef = doc(db, 'posts', id);
+  updateDoc(washingtonRef, {
+    contenido: newFields,
+  // updateDoc(doc(db, 'posts', id), newFields);
+  });
+};

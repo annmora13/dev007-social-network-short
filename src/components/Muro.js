@@ -1,6 +1,8 @@
 import { onSnapshot } from 'firebase/firestore';
 // import { async } from 'regenerator-runtime';
-import { createPost, erasePosts, getPosts } from '../lib/index.js';
+import {
+  createPost, erasePosts, getPosts, editPost, getPost,
+} from '../lib/index.js';
 
 // Variables
 export const Muro = (onNavigate) => {
@@ -8,8 +10,8 @@ export const Muro = (onNavigate) => {
   const principal = document.createElement('div');
   const buttonHome = document.createElement('button');
   const postList = document.createElement('div');
-  // let editStatus = false;
-  // let id = '';
+  let editStatus = false;
+  let id = '';
 
   // Asignación de clases
   HomeDiv.setAttribute('class', 'container1');
@@ -25,7 +27,7 @@ export const Muro = (onNavigate) => {
       <h1 class="neonText">¡Bienvenido, coder!</h1>
     </div>
     <div class="new-post__container">
-      <textarea id="doitTask" class="new-post__container__textarea"></textarea>
+      <textArea id="doitTask" class="new-post__container__textarea"></textArea>
       <span class= "neon-text2">
       <button class="new-post__container__button" >Publicar</button>
       <button class="edit-post__container__button" >Editar</button></span>
@@ -93,50 +95,50 @@ export const Muro = (onNavigate) => {
       erasePosts(dataset.id);
     }));
 
-    //   // Editar Post
-    // HomeDiv.querySelector('.edit-post__container__button').addEventListener(
-    //   'click',
-    //   async (e) => {
-    //     const textAreaContent = HomeDiv.querySelector(
-    //       '.new-post__container__textarea',
-    //     );
-    //     id = e.target.getAttribute('data-id');
-    //     try {
-    //       const p = await editPost(id, {
-    //         contenido: 'algo',
-    //       });
-    //       console.log(p);
-    //     } catch (error) {
-    //       console.log(error);
-    //     }
+    // Editar Post
+    HomeDiv.querySelector('.edit-post__container__button').addEventListener(
+      'click',
+      async (e) => {
+        const textAreaContent = HomeDiv.querySelector(
+          '.new-post__container__textarea',
+        );
+        console.log(textAreaContent);
+        id = e.target.getAttribute('data-id');
+        try {
+          const p = await editPost(id, {
+            contenido: 'algo',
+          });
+          console.log(p);
+        } catch (error) {
+          console.log(error);
+        }
 
-    //     getPosts(onSnapshot);
-    //     postList.className = '';
-    //   },
-    // );
+        getPosts(onSnapshot);
+        postList.className = '';
+      },
+    );
 
-    // const btnsEdit = postList.querySelectorAll('.btn-edit');
-    // btnsEdit.forEach((button) => {
-    //   button.addEventListener('click', async (e) => {
-    //     console.log(e.target.getAttribute('data-id'));
-    //     const doc = await getPost(e.target.getAttribute('data-id'));
-    //     editStatus = true;
-    //     id = e.target.getAttribute('data-id');
-    //     console.log(doc.data());
-    //     document.getElementById('doitTask').value = doc.data().contenido;
+    const btnsEdit = postList.querySelectorAll('.btn-edit');
+    btnsEdit.forEach((button) => {
+      button.addEventListener('click', async (e) => {
+        console.log(e.target.getAttribute('data-id'));
+        const doc = await getPost(e.target.getAttribute('data-id'));
+        editStatus = true;
+        id = e.target.getAttribute('data-id');
+        console.log(doc.data());
+        document.getElementById('doitTask').value = doc.data().contenido;
 
-    //     if (!editStatus) {
-    //       saveTask(e.target.getAttribute('data-id'));
-    //     } else {
-    //       editPost(id, {
-    //         contenido: document.getElementById('doitTask').value,
-    //       });
-    //       editStatus = false;
-    //     }
+        if (!editStatus) {
+          saveTask(e.target.getAttribute('data-id'));
+        } else {
+          console.log(document.querySelector('#doitTask').value);
+          editPost(id, document.querySelector('#doitTask').value);
+          editStatus = false;
+        }
 
-    //     // editPost(e.target.getAttribute('data-id'));
-    //   });
-    // });
+        // editPost(e.target.getAttribute('data-id'));
+      });
+    });
 
     // Botón de like
     //   const heartIcon = document.getElementById('heartIcon');

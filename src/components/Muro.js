@@ -1,4 +1,4 @@
-import { onSnapshot } from 'firebase/firestore';
+import { onSnapshot, updateDoc } from 'firebase/firestore';
 // import { async } from 'regenerator-runtime';
 import {
   createPost, erasePosts, getPosts, editPost, getPost,
@@ -96,27 +96,6 @@ export const Muro = (onNavigate) => {
     }));
 
     // Editar Post
-    HomeDiv.querySelector('.edit-post__container__button').addEventListener(
-      'click',
-      async (e) => {
-        const textAreaContent = HomeDiv.querySelector(
-          '.new-post__container__textarea',
-        );
-        console.log(textAreaContent);
-        id = e.target.getAttribute('data-id');
-        try {
-          const p = await editPost(id, {
-            contenido: 'algo',
-          });
-          console.log(p);
-        } catch (error) {
-          console.log(error);
-        }
-
-        getPosts(onSnapshot);
-        postList.className = '';
-      },
-    );
 
     const btnsEdit = postList.querySelectorAll('.btn-edit');
     btnsEdit.forEach((button) => {
@@ -126,17 +105,8 @@ export const Muro = (onNavigate) => {
         editStatus = true;
         id = e.target.getAttribute('data-id');
         console.log(doc.data());
-        document.getElementById('doitTask').value = doc.data().contenido;
-
-        if (!editStatus) {
-          saveTask(e.target.getAttribute('data-id'));
-        } else {
-          console.log(document.querySelector('#doitTask').value);
-          editPost(id, document.querySelector('#doitTask').value);
-          editStatus = false;
-        }
-
-        // editPost(e.target.getAttribute('data-id'));
+        const newInput = prompt('Edita tu post.');
+        editPost(e.target.getAttribute('data-id'), newInput);
       });
     });
 

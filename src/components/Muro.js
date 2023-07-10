@@ -1,5 +1,4 @@
-import { onSnapshot, updateDoc } from 'firebase/firestore';
-// import { async } from 'regenerator-runtime';
+import { onSnapshot } from 'firebase/firestore';
 import {
   createPost, erasePosts, getPosts, editPost, getPost,
 } from '../lib/index.js';
